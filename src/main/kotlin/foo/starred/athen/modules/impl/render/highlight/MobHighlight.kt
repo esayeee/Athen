@@ -1,4 +1,4 @@
-﻿@file:Suppress("unused")
+@file:Suppress("unused")
 
 package foo.starred.athen.modules.impl.render.highlight
 
@@ -45,6 +45,10 @@ object MobHighlight : Module(
     val json = JsonStore("features/mobHighlight")
     val e0 = json.mutableList("e0", EntityNamed.CODEC)
     val e1 = json.mutableList("e1", EntityTyped.CODEC)
+
+    // 从原 MobHighlightESP 合并进来的配置项
+    val depth by config.switch("Depth check", true)
+    val tracer by config.switch("Tracers", false)
 
     private val key by config.switch("Highlight key", true)
     private val keybind by config.keybind("Key to add entity")
@@ -256,8 +260,6 @@ object MobHighlight : Module(
     }
 
     private fun fn1(aabb: AABB, color: Int) {
-        val depth = true
-
         extractFrameBox(aabb, color, depth = depth)
     }
 
